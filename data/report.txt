@@ -1,0 +1,16 @@
+the 4
+dog 3
+fox 3
+a 2
+lazy 2
+quick 2
+and 1
+away 1
+barks 1
+better 1
+brown 1
+is 1
+jumps 1
+over 1
+runs 1
+than 1

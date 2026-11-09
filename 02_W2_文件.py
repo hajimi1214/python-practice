@@ -52,7 +52,20 @@ WORDS_TXT = HERE / "data" / "words.txt"
 # 两种都对。先把写法A 写会，再用写法B 替换一遍，你就懂 get 了。
 # ============================================================
 def read_and_count(path):
-    raise NotImplementedError("第 7 题")
+    with open(path, encoding='utf-8') as f:
+        text = f.read()
+        text = text.lower()
+        words = text.split()
+
+    counts = {}
+    for w in words:
+        w = w.strip('.,!?;:')
+        if w:
+            if w in counts:
+                counts[w] = counts[w] + 1
+            else:
+                counts[w] = 1
+    return counts
 
 
 # ============================================================
@@ -88,8 +101,12 @@ def read_and_count(path):
 #     所以测试我用绝对路径，你自己试的时候建议也用绝对路径。
 # ============================================================
 def write_report(src, dst):
-    raise NotImplementedError("第 8 题")
-
+    counts = read_and_count(src)
+    print(counts)
+    items = sorted(counts.items(), key= lambda kv: (-kv[1],kv[0]))
+    with open(dst, 'w',encoding='utf-8') as f:
+        for word, count in items:
+            f.write(f"{word} {count}\n")
 
 # ============================================================
 # 自测区
@@ -98,3 +115,6 @@ if __name__ == "__main__":
     print("文件在这儿：", WORDS_TXT)
     result = read_and_count(str(WORDS_TXT))
     print("词频：", result)
+    write_report(str(WORDS_TXT), str(HERE / "data" / "report.txt"))
+    print("报表已生成")
+
